@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
+
+    private float bounds = 4.5f;
     void Update()
     {
         float moveInput = Input.GetAxis("Horizontal");
