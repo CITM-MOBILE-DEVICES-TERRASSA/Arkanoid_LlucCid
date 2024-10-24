@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,5 +36,23 @@ public class Ball : MonoBehaviour
             ballRb.velocity *= velocityMultiplier;
             GameManager.Instance.BlockDestroyed();
         }
+        //VelocityFix();
     }
+
+    /*private void VelocityFix() {
+        float velocityDelta = 0.5f;
+        float minVelocity = 0.2f;
+
+        if (Math.Abs(ballRb.velocity.x) < minVelocity)
+        {
+            velocityDelta = Random.value < 0.5f ? velocityDelta : -velocityDelta;
+            ballRb.velocity += new Vector2(velocityDelta, 0f);
+
+        }
+        if (Math.Abs(ballRb.velocity.y) < minVelocity)
+        {
+            velocityDelta = Random.value < 0.5f ? velocityDelta : -velocityDelta;
+            ballRb.velocity += new Vector2(0f, velocityDelta);
+        }
+    }*/
 }
