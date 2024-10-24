@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private Vector2 initialVelocity;
+    [SerializeField] private float velocityMultiplier;
     private Rigidbody2D ballRb;
     private bool isBallMoving;
     void Start()
@@ -25,5 +26,14 @@ public class Ball : MonoBehaviour
         transform.parent = null;
         ballRb.velocity = initialVelocity;
         isBallMoving = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if(collision.gameObject.CompareTag("Block"))
+        {
+            Destroy(collision.gameObject);
+            ballRb.velocity *= velocityMultiplier;
+            GameManager.Instance.BlockDestroyed();
+        }
     }
 }
