@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4600943541004887752}
   - component: {fileID: 1053989893196752962}
   - component: {fileID: 5575102270565748159}
+  - component: {fileID: 2009857362181706}
   m_Layer: 0
   m_Name: Cracked_Brick
   m_TagString: Block
@@ -130,3 +131,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.2, y: 2.21}
   m_EdgeRadius: 0
+--- !u!114 &2009857362181706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2641207467121616346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf8bea44add2244b976392b519c9211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lives: 1

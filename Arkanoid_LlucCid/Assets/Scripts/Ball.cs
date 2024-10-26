@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private float velocityMultiplier;
     private Rigidbody2D ballRb;
     private bool isBallMoving;
+
     void Start()
     {
         ballRb = GetComponent<Rigidbody2D>();
@@ -29,30 +30,17 @@ public class Ball : MonoBehaviour
         isBallMoving = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if(collision.gameObject.CompareTag("Block"))
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Block"))
         {
-            Destroy(collision.gameObject);
-            ballRb.velocity *= velocityMultiplier;
-            GameManager.Instance.BlockDestroyed();
+            Block block = collision.gameObject.GetComponent<Block>();
+            if (block != null)
+            {
+                block.Hit();  // Llama al método Hit para reducir la vida del bloque
+            }
+
+            ballRb.velocity *= velocityMultiplier;  // Aumenta la velocidad de la bola tras el impacto
         }
-        //VelocityFix();
     }
-
-    /*private void VelocityFix() {
-        float velocityDelta = 0.5f;
-        float minVelocity = 0.2f;
-
-        if (Math.Abs(ballRb.velocity.x) < minVelocity)
-        {
-            velocityDelta = Random.value < 0.5f ? velocityDelta : -velocityDelta;
-            ballRb.velocity += new Vector2(velocityDelta, 0f);
-
-        }
-        if (Math.Abs(ballRb.velocity.y) < minVelocity)
-        {
-            velocityDelta = Random.value < 0.5f ? velocityDelta : -velocityDelta;
-            ballRb.velocity += new Vector2(0f, velocityDelta);
-        }
-    }*/
 }
