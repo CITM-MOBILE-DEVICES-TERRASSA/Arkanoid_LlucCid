@@ -81,7 +81,9 @@ public class Ball : MonoBehaviour
 
     public void ResetBall()
     {
+        transform.parent = FindObjectOfType<Player>().transform;
         transform.position = startposition;
+        
         ballRb.velocity = Vector2.zero;
         isBallMoving = false;
     }

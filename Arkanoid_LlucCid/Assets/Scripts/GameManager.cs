@@ -48,8 +48,9 @@ public class GameManager : MonoBehaviour
 
     public void ResetLevel()
     {
-        FindAnyObjectByType<Ball>().ResetBall();
         FindAnyObjectByType<Player>().ResetPlayer();
+        FindAnyObjectByType<Ball>().ResetBall();
+        
     }
 
     private void LoadNextLevel()
