@@ -987,6 +987,10 @@ PrefabInstance:
       value: Ball
       objectReference: {fileID: 0}
     - target: {fileID: 8279898849490806193, guid: 9129aca31de0f4e07a3ab06af9a44d95, type: 3}
+      propertyPath: maxVelocity
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279898849490806193, guid: 9129aca31de0f4e07a3ab06af9a44d95, type: 3}
       propertyPath: initialVelocity.x
       value: 2
       objectReference: {fileID: 0}

@@ -7,6 +7,9 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] private Vector2 initialVelocity;
     [SerializeField] private float velocityMultiplier;
+    [SerializeField] private float maxVelocity = 10f;
+    [SerializeField] private float minVerticalVelocity = 1f;
+
     private Rigidbody2D ballRb;
     private bool isBallMoving;
 
@@ -37,10 +40,36 @@ public class Ball : MonoBehaviour
             Block block = collision.gameObject.GetComponent<Block>();
             if (block != null)
             {
-                block.Hit();  // Llama al método Hit para reducir la vida del bloque
-            }
+                int previousLives = block.lives;  // Guarda las vidas antes de llamar a Hit
+                block.Hit();
 
-            ballRb.velocity *= velocityMultiplier;  // Aumenta la velocidad de la bola tras el impacto
+                // Solo aumenta la velocidad si el bloque fue destruido
+                if (previousLives > 0 && block.lives <= 0)
+                {
+                    ballRb.velocity *= velocityMultiplier;
+                    LimitVelocity();
+                }
+            }
+        }
+
+        // Asegura una velocidad mínima vertical
+        EnsureVerticalVelocity();
+    }
+
+    private void LimitVelocity()
+    {
+        if (ballRb.velocity.magnitude > maxVelocity)
+        {
+            ballRb.velocity = ballRb.velocity.normalized * maxVelocity;
+        }
+    }
+
+    private void EnsureVerticalVelocity()
+    {
+        if (Mathf.Abs(ballRb.velocity.y) < minVerticalVelocity)
+        {
+            float newVerticalVelocity = minVerticalVelocity * Mathf.Sign(ballRb.velocity.y != 0 ? ballRb.velocity.y : 1);
+            ballRb.velocity = new Vector2(ballRb.velocity.x, newVerticalVelocity);
         }
     }
 }
