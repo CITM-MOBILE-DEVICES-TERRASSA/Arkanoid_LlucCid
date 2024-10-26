@@ -10,11 +10,13 @@ public class Ball : MonoBehaviour
     [SerializeField] private float maxVelocity = 10f;
     [SerializeField] private float minVerticalVelocity = 1f;
 
-    private Rigidbody2D ballRb;
+    public Rigidbody2D ballRb;
     private bool isBallMoving;
 
+    Vector2 startposition;
     void Start()
     {
+        startposition = transform.position;
         ballRb = GetComponent<Rigidbody2D>();
     }
 
@@ -35,6 +37,10 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        /*if (collision.gameObject.CompareTag("Dead Zone")) {
+            FindObjectOfType<GameManager>().LoseHealth();
+        }*/
+
         if (collision.gameObject.CompareTag("Block"))
         {
             Block block = collision.gameObject.GetComponent<Block>();
@@ -71,5 +77,12 @@ public class Ball : MonoBehaviour
             float newVerticalVelocity = minVerticalVelocity * Mathf.Sign(ballRb.velocity.y != 0 ? ballRb.velocity.y : 1);
             ballRb.velocity = new Vector2(ballRb.velocity.x, newVerticalVelocity);
         }
+    }
+
+    public void ResetBall()
+    {
+        transform.position = startposition;
+        ballRb.velocity = Vector2.zero;
+        isBallMoving = false;
     }
 }

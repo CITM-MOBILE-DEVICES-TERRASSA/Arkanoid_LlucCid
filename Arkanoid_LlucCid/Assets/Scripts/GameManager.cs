@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private int blocksLeft;
 
     public static GameManager Instance { get; private set; }
-
+    public int lives = 3;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -34,6 +34,22 @@ public class GameManager : MonoBehaviour
             Debug.Log("You win!");
             LoadNextLevel();
         }
+    }
+
+    public  void LoseHealth() {
+        lives --;
+        if (lives <= 0) {
+            SceneManager.LoadScene("GameOver");
+        }
+        else {
+            ResetLevel();
+        }
+    }
+
+    public void ResetLevel()
+    {
+        FindAnyObjectByType<Ball>().ResetBall();
+        FindAnyObjectByType<Player>().ResetPlayer();
     }
 
     private void LoadNextLevel()

@@ -5,6 +5,6 @@ using UnityEngine;
 public class LoseTrigger : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision) {
-        GameManager.Instance.ReloadScene();
+        FindObjectOfType<GameManager>().LoseHealth();
     }
 }
